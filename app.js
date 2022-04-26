@@ -250,6 +250,9 @@ function findPersonFamily(person, people){
     let family;
     family += findSpouse(person, people)
     family += findParents(person, people)
+    //Siblings
+    family += findPersonDescendants(person,people)
+    return family
 }
     
 
@@ -282,4 +285,23 @@ function singleItemSearch(person){
     }
 
 
+function findParents(person, people){
+    let parentId = person.parents;
+    if (parentId.length < 1){
+        return 'No Parents'
+    }
+    else{
+        let parents = people.filter(function(el){
+            for(let i = 0; i < parentId.length; i++);
+            if(parentId[i]== people.id){
+                return true;
+            }
+            else{
+                return false
+            }
 
+
+        })
+    }
+    
+}
