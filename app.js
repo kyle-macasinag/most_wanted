@@ -184,3 +184,14 @@ function chars(input) {
 
 //////////////////////////////////////////* End Of Starter Code *//////////////////////////////////////////
 // Any additional functions can be written below this line 👇. Happy Coding! 😁
+function searchByTraits(people){
+    let eyeColor = promptFor("What is the person's eye color?", chars)
+    let gender = promptFor("What is the person's gender?", chars)
+    let occupation = promptFor("What is the person's occupation?", chars)
+    let foundPerson = people.filter(function(person){
+        if (person.eyeColor == eyeColor && person.gender == gender && person.occupation == occupation){
+            return true;
+        }
+    })
+    return foundPerson
+}
