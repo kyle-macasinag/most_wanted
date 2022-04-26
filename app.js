@@ -95,6 +95,34 @@ function mainMenu(person, people) {
 }
 // End of mainMenu()
 
+
+function findPersonFamily(person, people){
+    let parent_id = person.parents
+    let spouseId = person.currentSpouse
+    let parentsList = people.filter(function (el){
+        if (el.id == parent_id){
+        return true;
+        }
+        else{
+            return false
+        }
+    })
+    let spouse = people.filter(function(el){
+        if (el.id == spouseId){
+            return true
+        }
+        else{
+            return false
+        }
+    })
+    let family = `Parent(s) ${parentsList[0].firstName} ${parentsList[0].lastName} `;
+    family += `Current Spouse ${spouse[0].firstName} ${spouse[0].lastName}`;
+    return family
+    
+    
+    
+}
+    
 /**
  * This function is used when searching the people collection by
  * a person-object's firstName and lastName properties.
