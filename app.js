@@ -97,16 +97,15 @@ function mainMenu(person, people) {
 
 
 function findPersonFamily(person, people){
-    let parent_id = person.parents
+    let family;
+    family += findSpouse(person, people)
+    family += findParents(person, people)
+}
+    
+
+function findSpouse(person, people){
+
     let spouseId = person.currentSpouse
-    let parentsList = people.filter(function (el){
-        if (el.id == parent_id){
-        return true;
-        }
-        else{
-            return false
-        }
-    })
     let spouse = people.filter(function(el){
         if (el.id == spouseId){
             return true
@@ -115,14 +114,32 @@ function findPersonFamily(person, people){
             return false
         }
     })
-    let family = `Parent(s) ${parentsList[0].firstName} ${parentsList[0].lastName} `;
-    family += `Current Spouse ${spouse[0].firstName} ${spouse[0].lastName}`;
-    return family
     
-    
-    
+    let spouseToAdd= `Current Spouse ${spouse[0].firstName} ${spouse[0].lastName}`;
+    return spouseToAdd
+
+
+
+
 }
+
+
+
     
+
+    // spouseName = `Current Spouse ${spouse[0].firstName} ${spouse[0].lastName}`
+    // return spouseName
+
+
+    
+
+
+
+
+
+
+
+
 /**
  * This function is used when searching the people collection by
  * a person-object's firstName and lastName properties.
@@ -222,4 +239,37 @@ function searchByTraits(people){
         }
     })
     return foundPerson
+}
+
+
+
+
+
+
+
+
+
+function findPersonFamily(person, people){
+    let parent_id = person.parents
+    let spouseId = person.currentSpouse
+    let parentsList = people.filter(function (el){
+        if (el.id == parent_id){
+        return true;
+        }
+        else{
+            return false
+        }
+    })
+    let spouse = people.filter(function(el){
+        if (el.id == spouseId){
+            return true
+        }
+        else{
+            return false
+        }
+    })
+    let family = `Parent(s) ${parentsList[0].firstName} ${parentsList[0].lastName} `;
+    family += `Current Spouse ${spouse[0].firstName} ${spouse[0].lastName}`;
+    return family
+    
 }
