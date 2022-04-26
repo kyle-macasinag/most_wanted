@@ -59,7 +59,7 @@ function mainMenu(person, people) {
         return app(people);
     }
     let displayOption = prompt(
-        `Found ${person[0].firstName} ${person[0].lastName}. Do you want to know their 'info', 'family', or 'descendants'?\nType the option you want or type 'restart' or 'quit'.`
+        `Found ${person[0].firstName} ${person[0].lastName}. Do you want to know their 'info', 'family', or 'descendants'?\nType the option you want or type 'search by single criteria' 'restart' or 'quit'.`
     );
     // Routes our application based on the user's input
     switch (displayOption) {
@@ -81,6 +81,10 @@ function mainMenu(person, people) {
             let personDescendants = findPersonDescendants(person[0], people);
             alert(personDescendants);
             break;
+        case "search by single criteria":
+            let personSearch = singleItemSearch(person[0])
+            alert(personSearch);
+            break;
         case "restart":
             // Restart app() from the very beginning
             app(people);
@@ -96,32 +100,8 @@ function mainMenu(person, people) {
 // End of mainMenu()
 
 
-function findPersonFamily(person, people){
-    let family;
-    family += findSpouse(person, people)
-    family += findParents(person, people)
-}
-    
-
-function findSpouse(person, people){
-
-    let spouseId = person.currentSpouse
-    let spouse = people.filter(function(el){
-        if (el.id == spouseId){
-            return true
-        }
-        else{
-            return false
-        }
-    })
-    
-    let spouseToAdd= `Current Spouse ${spouse[0].firstName} ${spouse[0].lastName}`;
-    return spouseToAdd
 
 
-
-
-}
 
 
 
@@ -273,22 +253,33 @@ function findPersonFamily(person, people){
 }
     
 
-function findSpouse(person, people){
 
+function findSpouse(person, people){
+    if(person.currentSpouse === null){
+        return "no spouse"
+    }
+    else{
+    let spouseToAdd;
     let spouseId = person.currentSpouse
     let spouse = people.filter(function(el){
-        if (el.id == spouseId){
+        if (el.id == spouseId){   
             return true
         }
-        else{
+        else{    
             return false
         }
     })
-    
-    let spouseToAdd= `Current Spouse ${spouse[0].firstName} ${spouse[0].lastName}`;
+    spouseToAdd = `Current Spouse ${spouse[0].firstName} ${spouse[0].lastName}`;
     return spouseToAdd
-
-
-
-
+    }
 }
+
+
+
+function singleItemSearch(person){
+    let singleSearch = prompt("Search by: First Name, Last Name, Gender, DOB, Height, Weight, Eye Color, Occupation, Parents, or Spouse?")
+
+    }
+
+
+
