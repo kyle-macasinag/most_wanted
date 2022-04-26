@@ -64,7 +64,7 @@ function mainMenu(person, people) {
     // Routes our application based on the user's input
     switch (displayOption) {
         case "info":
-            //! TODO #1: Utilize the displayPerson function //////////////////////////////////////////
+            //! TODO #1: Utilize the displayPerson function /////////////////////////////$$$$$$$COMPLETE$$$$$$$$
             // HINT: Look for a person-object stringifier utility function to help
             let personInfo = displayPerson(person[0]);
             alert(personInfo);
@@ -141,6 +141,12 @@ function displayPerson(person) {
     let personInfo = `First Name: ${person.firstName}\n`;
     personInfo += `Last Name: ${person.lastName}\n`;
     //! TODO #1a: finish getting the rest of the information to display //////////////////////////////////////////
+    personInfo += `Gender: ${person.gender}\n`;
+    personInfo += `DOB: ${person.dob}\n`;
+    personInfo += `Height: ${person.height}\n`;
+    personInfo += `Weight: ${person.weight}\n`;
+    personInfo += `Eye Color: ${person.eyeColor}\n`;
+    personInfo += `Occupation: ${person.occupation}\n`;
     alert(personInfo);
 }
 // End of displayPerson()
@@ -184,6 +190,8 @@ function chars(input) {
 
 //////////////////////////////////////////* End Of Starter Code *//////////////////////////////////////////
 // Any additional functions can be written below this line 👇. Happy Coding! 😁
+
+
 function searchByTraits(people){
     let eyeColor = promptFor("What is the person's eye color?", chars)
     let gender = promptFor("What is the person's gender?", chars)
@@ -194,4 +202,48 @@ function searchByTraits(people){
         }
     })
     return foundPerson
+}
+function findPersonDescendants(person){
+    let parentId = person.id;
+    let descendantList = [];
+    let foundDescendants = data.filter(function(person){
+        if(person.parents.includes(parentId)){
+            descendantList.push(person.firstName + person.lastName);
+        }
+        else{
+            return false;
+        }
+    })
+    return descendantList;
+}
+
+
+
+
+
+function findPersonFamily(person, people){
+    let family;
+    family += findSpouse(person, people)
+    family += findParents(person, people)
+}
+    
+
+function findSpouse(person, people){
+
+    let spouseId = person.currentSpouse
+    let spouse = people.filter(function(el){
+        if (el.id == spouseId){
+            return true
+        }
+        else{
+            return false
+        }
+    })
+    
+    let spouseToAdd= `Current Spouse ${spouse[0].firstName} ${spouse[0].lastName}`;
+    return spouseToAdd
+
+
+
+
 }
