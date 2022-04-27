@@ -59,7 +59,7 @@ function mainMenu(person, people) {
         return app(people);
     }
     let displayOption = prompt(
-        `Found ${person[0].firstName} ${person[0].lastName}. Do you want to know their 'info', 'family', or 'descendants'?\nType the option you want or type 'search by single criteria' 'restart' or 'quit'.`
+        `Found ${person[0].firstName} ${person[0].lastName}. Do you want to know their 'info', 'family', or 'descendants'?\nType the option you want or type 'restart' or 'quit'.`
     );
     // Routes our application based on the user's input
     switch (displayOption) {
@@ -80,10 +80,6 @@ function mainMenu(person, people) {
             // HINT: Review recursion lecture + demo for bonus user story
             let personDescendants = findPersonDescendants(person[0], people);
             alert(personDescendants);
-            break;
-        case "search by single criteria":
-            let personSearch = singleItemSearch(person[0])
-            alert(personSearch);
             break;
         case "restart":
             // Restart app() from the very beginning
@@ -172,7 +168,7 @@ function displayPerson(person) {
     personInfo += `Weight: ${person.weight}\n`;
     personInfo += `Eye Color: ${person.eyeColor}\n`;
     personInfo += `Occupation: ${person.occupation}\n`;
-    alert(personInfo);
+    return(personInfo);
 }
 // End of displayPerson()
 
@@ -217,17 +213,15 @@ function chars(input) {
 // Any additional functions can be written below this line 👇. Happy Coding! 😁
 
 
-function searchByTraits(people){
-    let eyeColor = promptFor("What is the person's eye color?", chars)
-    let gender = promptFor("What is the person's gender?", chars)
-    let occupation = promptFor("What is the person's occupation?", chars)
-    let foundPerson = people.filter(function(person){
-        if (person.eyeColor == eyeColor && person.gender == gender && person.occupation == occupation){
-            return true;
-        }
-    })
-    return foundPerson
-}
+function searchByTraits(people)
+// prompt would you like to search using 1 or multiple traits Y/N
+// if single, else multiple
+// make a function for a single trait search - return all items in data that has that trait
+// for single - userArray = data.filter(USERINPUT) 
+//make a function that allows user to search with 5 traits. filter each trait and return items
+// userArray= filter.... userArray.filter(trait)
+
+
 function findPersonDescendants(person){
     let parentId = person.id;
     let descendantList = [];
@@ -278,23 +272,6 @@ function findSpouse(person, people){
     }
 }
 
-
-
-// function singleItemSearch(person, people){
-//     let arrayOfTraits = ["First Name", "Last Name", "Gender", "DOB", "Height", "Weight", "Eye Color", "Occupation", "Parents", "Spouse"]
-//     let singleSearch = prompt(`What category would you like to search for: ${arrayOfTraits}?`)
-//     let narrowDown = prompt(`What ${singleSearch} do you want to find?`)
-//     let finalSearch = people.filter(function(el){
-//         for(let i = 0; i < people.length; i++){
-//             if(person.includes(narrowDown)){
-//                 return true
-//             }
-//             else{
-//                 return false
-//             }
-//         }
-//         return finalSearch
-//     })
 
 
 
