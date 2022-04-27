@@ -247,10 +247,10 @@ function findPersonDescendants(person){
 
 
 function findPersonFamily(person, people){
-    let family;
+    let family = []
     // family += findSpouse(person, people)
     family += findParents(person, people)
-    //Siblings
+    Siblings
     // family += findPersonDescendants(person,people)
     return family
 }
