@@ -248,32 +248,33 @@ function findPersonDescendants(person){
 
 function findPersonFamily(person, people){
     let family = []
-    // family += findSpouse(person, people)
-    family += findParents(person, people)
-    Siblings
-    // family += findPersonDescendants(person,people)
+    family += "SPOUSE" + findSpouse(person, people)
+    family += "PARENTS" + findParents(person, people)
+    family += "SIBLINGS" + siblingFinder(person, people)
+    family += "DESCENDANTS" + findPersonDescendants(person,people)
     return family
 }
     
 
 
 function findSpouse(person, people){
+    let spouseArray = []
     if(person.currentSpouse == null){
-        return "no spouse"
+        return "No spouse"
     }
     else{
-    let spouseToAdd;
     let spouseId = person.currentSpouse
     let spouse = people.filter(function(el){
-        if (el.id == spouseId){   
+        if (el.id == spouseId){ 
+            spouseArray.push(el.firstName + " " + el.lastName)  
             return true
         }
         else{    
             return false
         }
     })
-    spouseToAdd = `Current Spouse ${spouse[0].firstName} ${spouse[0].lastName}`;
-    return spouseToAdd
+    
+    return spouseArray
     }
 }
 
@@ -295,11 +296,11 @@ function singleItemSearch(person){
             let parents = people.filter(function(el){
                 for(let i = 0; i < parentId.length; i++){
                 if(el.id == parentId[0]){
-                    parentsArray.push(el.firstName + el.lastName)
+                    parentsArray.push(el.firstName + " " + el.lastName)
                     return true
                 }
                 else if(el.id == parentId[1]){
-                    parentsArray.push(el.firstName + el.lastName)
+                    parentsArray.push(el.firstName + " " + el.lastName)
                     return true
                 } else {
                     return false
@@ -311,4 +312,24 @@ function singleItemSearch(person){
         }
     
         return parentsArray
+}
+
+
+
+
+function siblingFinder(person, people){
+    let siblingsArray = []
+    let parentId = person.parents
+    let foundSiblings = people.filter(function(el){
+        for(let i = 0; i < people.length; i++){
+        if(el.parents[0] == person.parents[0] && el.id != person.id){
+            siblingsArray.push(el.firstName + " " + el.lastName)
+            return true
+        }
+        else{
+            return false
+        }
+    }
+    })
+    return siblingsArray
 }
