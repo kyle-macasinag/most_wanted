@@ -161,7 +161,6 @@ function displayPeople(people) {
 function displayPerson(person) {
     let personInfo = `First Name: ${person.firstName}\n`;
     personInfo += `Last Name: ${person.lastName}\n`;
-    //! TODO #1a: finish getting the rest of the information to display //////////////////////////////////////////
     personInfo += `Gender: ${person.gender}\n`;
     personInfo += `DOB: ${person.dob}\n`;
     personInfo += `Height: ${person.height}\n`;
@@ -213,7 +212,46 @@ function chars(input) {
 // Any additional functions can be written below this line 👇. Happy Coding! 😁
 
 
-function searchByTraits(people)
+function searchByTraits(people){
+    let traitsArray = ["Gender", "DOB", "Height", "Occupation", "Eye Color"]
+    let singleOrMultiTrait = prompt("Would you like to search by one or multiple traits?");{
+    if (singleOrMultiTrait == "one"){
+        singleTraitFunction(people);
+        return true
+        
+         
+    }
+    else if(singleOrMultiTrait == "multiple"){
+        multiTraitFunction
+        return true
+    }
+}
+
+
+} 
+//LINE 238 .INCLUDES NOT WORKING AS INTENDED |||MIGHT HAVE TO BE A FOR LOOP
+function singleTraitFunction(people){
+    let traitsArray = ["Gender", "DOB", "Height", "Occupation", "Eye Color"]
+    let trait = prompt(`Which trait would you like to search? ${traitsArray}`)
+    let narrowSearch = prompt(`What sort of ${trait} would you like to search for?`)
+    let traitArray = people.filter(function(el){
+        if (el.people.includes(narrowSearch)){
+            return true
+        }
+        else{
+            return false
+        }
+
+
+
+    })
+return traitArray
+}
+
+
+
+
+
 // prompt would you like to search using 1 or multiple traits Y/N
 // if single, else multiple
 // make a function for a single trait search - return all items in data that has that trait
