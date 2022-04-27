@@ -248,17 +248,17 @@ function findPersonDescendants(person){
 
 function findPersonFamily(person, people){
     let family;
-    family += findSpouse(person, people)
+    // family += findSpouse(person, people)
     family += findParents(person, people)
     //Siblings
-    family += findPersonDescendants(person,people)
+    // family += findPersonDescendants(person,people)
     return family
 }
     
 
 
 function findSpouse(person, people){
-    if(person.currentSpouse === null){
+    if(person.currentSpouse == null){
         return "no spouse"
     }
     else{
@@ -282,26 +282,33 @@ function findSpouse(person, people){
 function singleItemSearch(person){
     let singleSearch = prompt("Search by: First Name, Last Name, Gender, DOB, Height, Weight, Eye Color, Occupation, Parents, or Spouse?")
 
-    }
+}
 
 
-function findParents(person, people){
-    let parentId = person.parents;
-    if (parentId.length < 1){
-        return 'No Parents'
-    }
-    else{
-        let parents = people.filter(function(el){
-            for(let i = 0; i < parentId.length; i++);
-            if(parentId[i]== people.id){
-                return true;
+    function findParents(person, people){
+        let parentsArray = [];
+        let parentId = person.parents;
+        if (parentId.length < 1){
+            return 'No Parents'
+        }
+        else{
+            let parents = people.filter(function(el){
+                for(let i = 0; i < parentId.length; i++){
+                if(el.id == parentId[0]){
+                    parentsArray.push(el.firstName + el.lastName)
+                    return true
+                }
+                else if(el.id == parentId[1]){
+                    parentsArray.push(el.firstName + el.lastName)
+                    return true
+                } else {
+                    return false
+                }
+            
             }
-            else{
-                return false
-            }
-
-
         })
-    }
     
+        }
+    
+        return parentsArray
 }
