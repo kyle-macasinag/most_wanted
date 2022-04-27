@@ -248,10 +248,10 @@ function findPersonDescendants(person){
 
 function findPersonFamily(person, people){
     let family = []
-    family += "SPOUSE" + findSpouse(person, people)
-    family += "PARENTS" + findParents(person, people)
-    family += "SIBLINGS" + siblingFinder(person, people)
-    family += "DESCENDANTS" + findPersonDescendants(person,people)
+    family += "SPOUSE: " + findSpouse(person, people)
+    family += "PARENTS: " + findParents(person, people)
+    family += "SIBLINGS: " + siblingFinder(person, people)
+    family += "DESCENDANTS: " + findPersonDescendants(person,people)
     return family
 }
     
@@ -280,56 +280,45 @@ function findSpouse(person, people){
 
 
 
-function singleItemSearch(person){
-    let singleSearch = prompt("Search by: First Name, Last Name, Gender, DOB, Height, Weight, Eye Color, Occupation, Parents, or Spouse?")
-
-}
-
-
-    function findParents(person, people){
-        let parentsArray = [];
-        let parentId = person.parents;
-        if (parentId.length < 1){
-            return 'No Parents'
-        }
-        else{
-            let parents = people.filter(function(el){
-                for(let i = 0; i < parentId.length; i++){
-                if(el.id == parentId[0]){
-                    parentsArray.push(el.firstName + " " + el.lastName)
-                    return true
-                }
-                else if(el.id == parentId[1]){
-                    parentsArray.push(el.firstName + " " + el.lastName)
-                    return true
-                } else {
-                    return false
-                }
-            
-            }
-        })
-    
-        }
-    
-        return parentsArray
-}
+// function singleItemSearch(person, people){
+//     let arrayOfTraits = ["First Name", "Last Name", "Gender", "DOB", "Height", "Weight", "Eye Color", "Occupation", "Parents", "Spouse"]
+//     let singleSearch = prompt(`What category would you like to search for: ${arrayOfTraits}?`)
+//     let narrowDown = prompt(`What ${singleSearch} do you want to find?`)
+//     let finalSearch = people.filter(function(el){
+//         for(let i = 0; i < people.length; i++){
+//             if(person.includes(narrowDown)){
+//                 return true
+//             }
+//             else{
+//                 return false
+//             }
+//         }
+//         return finalSearch
+//     })
 
 
 
 
 function siblingFinder(person, people){
-    let siblingsArray = []
+    let siblingNames = []
     let parentId = person.parents
+    if( person.parents.length <1){
+        siblingNames.push("No siblings")   
+    }
+    else {
     let foundSiblings = people.filter(function(el){
         for(let i = 0; i < people.length; i++){
-        if(el.parents[0] == person.parents[0] && el.id != person.id){
-            siblingsArray.push(el.firstName + " " + el.lastName)
-            return true
+       
+        if(el.parents[0] == person.parents[0] && el.id != person.id && el.parents.length > 0){
+            siblingNames.push(el.firstName + " " + el.lastName)
+            return true;
         }
+        
         else{
             return false
         }
     }
     })
-    return siblingsArray
+}
+    return siblingNames
 }
