@@ -311,7 +311,33 @@ function findSpouse(person, people){
 }
 
 
+function findParents(person, people){
+    let parentsArray = [];
+    let parentId = person.parents;
+    if (parentId.length < 1){
+        return 'No Parents'
+    }
+    else{
+        let parents = people.filter(function(el){
+            for(let i = 0; i < parentId.length; i++){
+            if(el.id == parentId[0]){
+                parentsArray.push(el.firstName + " " + el.lastName)
+                return true
+            }
+            else if(el.id == parentId[1]){
+                parentsArray.push(el.firstName + " " + el.lastName)
+                return true
+            } else {
+                return false
+            }
+        
+        }
+    })
 
+    }
+
+    return parentsArray   
+}
 
 
 function siblingFinder(person, people){
