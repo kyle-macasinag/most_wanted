@@ -79,7 +79,10 @@ function mainMenu(person, people) {
             //! TODO #3: Declare a findPersonDescendants function //////////////////////////////////////////
             // HINT: Review recursion lecture + demo for bonus user story
             let personDescendants = findPersonDescendants(person[0], people);
-            alert(personDescendants);
+            if (personDescendants == "No descendants"){
+                alert("No descendants")
+            }
+            displayPeople(personDescendants);
             break;
         case "restart":
             // Restart app() from the very beginning
@@ -214,7 +217,7 @@ function chars(input) {
 
 function searchByTraits(people){
     let traitsArray = ["Gender", "DOB", "Height", "Occupation", "Eye Color"]
-    let singleOrMultiTrait = prompt("Would you like to search by single or multiple traits?");{
+    let singleOrMultiTrait = promptFor("Would you like to search by single or multiple traits?", chars);{
     if (singleOrMultiTrait == "single"){
         let filteredArray = singleTraitFunction(people);
         alert(`Results that match your search: ${filteredArray}`)
@@ -234,8 +237,8 @@ function searchByTraits(people){
 function singleTraitFunction(people){
     let traitsArray = ["Gender", "DOB", "Height", "Occupation", "Eye Color"]
     let searchArray = []//STORES VALUES SEARCHING FOR
-    let trait = prompt(`Which trait would you like to search? ${traitsArray}`)
-    let narrowSearch = prompt(`What sort of ${trait} would you like to search for?`)
+    let trait = promptFor(`Which trait would you like to search? ${traitsArray}`, chars)
+    let narrowSearch = promptFor(`What sort of ${trait} would you like to search for?`, chars)
     for (let i = 0; i < people.length; i++){
         let filteredResults = people.filter(function(el){
             if (el[trait] == narrowSearch){
@@ -255,23 +258,23 @@ function singleTraitFunction(people){
 
 
 function multiTraitFunction(people){
-    let searchArray = []//STORES VALUES SEARCHING FOR
+    let searchArray = []
     let counter = 0
     let searching = true
     let traitsArray = ["Gender", "DOB", "Height", "Occupation", "Eye Color"];
-    let trait = prompt(`Which trait would you like to search? ${traitsArray}`);
-    let narrowSearch = prompt(`What sort of ${trait} would you like to search for?`)
+    let trait = promptFor(`Which trait would you like to search? ${traitsArray}`,chars);
+    let narrowSearch = promptFor(`What sort of ${trait} would you like to search for?`,charsFor)
     searchArray = (filteredTraitSearch(people, trait, narrowSearch))
-    let answer = prompt("Would you like to add another trait to your search? y/n")
+    let answer = promptFor("Would you like to add another trait to your search? yes/no", yesNo)
     if (answer === 'n'){
         searching = false
         return displayPeople(searchArray)
     }
     while(searching = true && counter < 4){
-        trait = prompt(`Which trait would you like to search? ${traitsArray}`);
-        narrowSearch = prompt(`What sort of ${trait} would you like to search for?`)
+        trait = promptFor(`Which trait would you like to search? ${traitsArray}`,chars);
+        narrowSearch = promptFor(`What sort of ${trait} would you like to search for?`,chars)
         searchArray = (filteredTraitSearch(searchArray, trait, narrowSearch))
-        let answer = prompt("Would you like to add another trait to your search? y/n")
+        let answer = promptFor("Would you like to add another trait to your search? yes/no", yesNo)
     if (answer === 'n'){
         searching = false
         return displayPeople(searchArray)
@@ -308,16 +311,20 @@ return filteredResults
 
 function findPersonDescendants(person){
     let parentId = person.id;
-    let descendantList = [];
     let foundDescendants = data.filter(function(person){
         if(person.parents.includes(parentId)){
-            descendantList.push(person.firstName + " " + person.lastName);
+            return true;
         }
         else{
             return false;
+            
         }
+    
     })
-    return descendantList;
+    if (foundDescendants.length < 1){
+        foundDescendants = "No descendants"
+    }
+    return foundDescendants;
 }
 
 
@@ -326,10 +333,9 @@ function findPersonDescendants(person){
 
 function findPersonFamily(person, people){
     let family = []
-    family += "SPOUSE: " + findSpouse(person, people)
-    family += "PARENTS: " + findParents(person, people)
-    family += "SIBLINGS: " + siblingFinder(person, people)
-    family += "DESCENDANTS: " + findPersonDescendants(person,people)
+    family += "Spouse: " + findSpouse(person, people) + " "
+    family += "Parents: " + findParents(person, people) + " "
+    family += "Siblings: " + siblingFinder(person, people) + " "
     return family
 }
     
