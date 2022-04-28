@@ -263,10 +263,10 @@ function multiTraitFunction(people){
     let searching = true
     let traitsArray = ["Gender", "DOB", "Height", "Occupation", "Eye Color"];
     let trait = promptFor(`Which trait would you like to search? ${traitsArray}`,chars);
-    let narrowSearch = promptFor(`What sort of ${trait} would you like to search for?`,charsFor)
+    let narrowSearch = promptFor(`What sort of ${trait} would you like to search for?`,chars)
     searchArray = (filteredTraitSearch(people, trait, narrowSearch))
     let answer = promptFor("Would you like to add another trait to your search? yes/no", yesNo)
-    if (answer === 'n'){
+    if (answer === 'no'){
         searching = false
         return displayPeople(searchArray)
     }
@@ -275,7 +275,7 @@ function multiTraitFunction(people){
         narrowSearch = promptFor(`What sort of ${trait} would you like to search for?`,chars)
         searchArray = (filteredTraitSearch(searchArray, trait, narrowSearch))
         let answer = promptFor("Would you like to add another trait to your search? yes/no", yesNo)
-    if (answer === 'n'){
+    if (answer === 'no'){
         searching = false
         return displayPeople(searchArray)
     }
