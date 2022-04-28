@@ -216,8 +216,9 @@ function searchByTraits(people){
     let traitsArray = ["Gender", "DOB", "Height", "Occupation", "Eye Color"]
     let singleOrMultiTrait = prompt("Would you like to search by one or multiple traits?");{
     if (singleOrMultiTrait == "one"){
-        singleTraitFunction(people);
-        return true
+        let filteredArray = singleTraitFunction(people);
+        alert(`Results that match your search: ${filteredArray}`)
+            app(mainMenu)
         
          
     }
@@ -237,7 +238,8 @@ function singleTraitFunction(people){
     let narrowSearch = prompt(`What sort of ${trait} would you like to search for?`)
     for (let i = 0; i < people.length; i++){
         let filteredResults = people.filter(function(el){
-            if (people.includes(narrowSearch)){
+            if (el[trait] == narrowSearch){
+                searchArray.push(el.firstName + " " + el.lastName)
                 return true
             }
             else {
@@ -245,13 +247,14 @@ function singleTraitFunction(people){
             }
 
         })
+        return searchArray
     }
-   
+    
 }
-
 
     // let criteria = 0
     // let searching = false
+        // let searchArray = []//STORES VALUES SEARCHING FOR
     // while(searching === false && criteria < 5){
     //     trait
 
