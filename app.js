@@ -232,22 +232,30 @@ function searchByTraits(people){
 //LINE 238 .INCLUDES NOT WORKING AS INTENDED |||MIGHT HAVE TO BE A FOR LOOP
 function singleTraitFunction(people){
     let traitsArray = ["Gender", "DOB", "Height", "Occupation", "Eye Color"]
+    let searchArray = []//STORES VALUES SEARCHING FOR
     let trait = prompt(`Which trait would you like to search? ${traitsArray}`)
     let narrowSearch = prompt(`What sort of ${trait} would you like to search for?`)
-    let traitArray = people.filter(function(el){
-        if (el.people.includes(narrowSearch)){
-            return true
-        }
-        else{
-            return false
-        }
+    for (let i = 0; i < people.length; i++){
+        let filteredResults = people.filter(function(el){
+            if (people.includes(narrowSearch)){
+                return true
+            }
+            else {
+                return false
+            }
 
-
-
-    })
-return traitArray
+        })
+    }
+   
 }
 
+
+    // let criteria = 0
+    // let searching = false
+    // while(searching === false && criteria < 5){
+    //     trait
+
+    // }
 
 
 
@@ -265,7 +273,7 @@ function findPersonDescendants(person){
     let descendantList = [];
     let foundDescendants = data.filter(function(person){
         if(person.parents.includes(parentId)){
-            descendantList.push(person.firstName + person.lastName);
+            descendantList.push(person.firstName + " " + person.lastName);
         }
         else{
             return false;
