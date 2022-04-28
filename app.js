@@ -214,8 +214,8 @@ function chars(input) {
 
 function searchByTraits(people){
     let traitsArray = ["Gender", "DOB", "Height", "Occupation", "Eye Color"]
-    let singleOrMultiTrait = prompt("Would you like to search by one or multiple traits?");{
-    if (singleOrMultiTrait == "one"){
+    let singleOrMultiTrait = prompt("Would you like to search by single or multiple traits?");{
+    if (singleOrMultiTrait == "single"){
         let filteredArray = singleTraitFunction(people);
         alert(`Results that match your search: ${filteredArray}`)
             app(mainMenu)
@@ -223,9 +223,9 @@ function searchByTraits(people){
          
     }
     else if(singleOrMultiTrait == "multiple"){
-        multiTraitFunction
-        return true
-    }
+            let multiArray = multiTraitFunction(people)
+            app(mainMenu)
+        }
 }
 
 
@@ -252,15 +252,50 @@ function singleTraitFunction(people){
     
 }
 
-    // let criteria = 0
-    // let searching = false
-        // let searchArray = []//STORES VALUES SEARCHING FOR
-    // while(searching === false && criteria < 5){
-    //     trait
-
-    // }
 
 
+function multiTraitFunction(people){
+    let searchArray = []//STORES VALUES SEARCHING FOR
+    let counter = 0
+    let searching = true
+    let traitsArray = ["Gender", "DOB", "Height", "Occupation", "Eye Color"];
+    let trait = prompt(`Which trait would you like to search? ${traitsArray}`);
+    let narrowSearch = prompt(`What sort of ${trait} would you like to search for?`)
+    searchArray = (filteredTraitSearch(people, trait, narrowSearch))
+    let answer = prompt("Would you like to add another trait to your search? y/n")
+    if (answer === 'n'){
+        searching = false
+        return displayPeople(searchArray)
+    }
+    while(searching = true && counter < 4){
+        trait = prompt(`Which trait would you like to search? ${traitsArray}`);
+        narrowSearch = prompt(`What sort of ${trait} would you like to search for?`)
+        searchArray = (filteredTraitSearch(searchArray, trait, narrowSearch))
+        let answer = prompt("Would you like to add another trait to your search? y/n")
+    if (answer === 'n'){
+        searching = false
+        return displayPeople(searchArray)
+    }
+
+    }
+return displayPeople(searchArray)
+}
+
+
+
+function filteredTraitSearch(people, trait, narrowSearch){
+        let filteredResults = people.filter(function(el){
+            if (el[trait] == narrowSearch){
+                
+                return true
+            }
+            else {
+                return false
+            }
+            
+        })
+return filteredResults
+}
 
 
 // prompt would you like to search using 1 or multiple traits Y/N
