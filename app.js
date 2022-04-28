@@ -216,7 +216,7 @@ function chars(input) {
 
 
 function searchByTraits(people){
-    let traitsArray = ["Gender", "DOB", "Height", "Occupation", "Eye Color"]
+    let traitsArray = ["Gender", "DOB", "Height", "Occupation", "eyeColor"]
     let singleOrMultiTrait = promptFor("Would you like to search by single or multiple traits?", chars);{
     if (singleOrMultiTrait == "single"){
         let filteredArray = singleTraitFunction(people);
@@ -233,9 +233,9 @@ function searchByTraits(people){
 
 
 } 
-//LINE 238 .INCLUDES NOT WORKING AS INTENDED |||MIGHT HAVE TO BE A FOR LOOP
+
 function singleTraitFunction(people){
-    let traitsArray = ["Gender", "DOB", "Height", "Occupation", "Eye Color"]
+    let traitsArray = ["Gender", "DOB", "Height", "Occupation", "eyeColor"]
     let searchArray = []//STORES VALUES SEARCHING FOR
     let trait = promptFor(`Which trait would you like to search? ${traitsArray}`, chars)
     let narrowSearch = promptFor(`What sort of ${trait} would you like to search for?`, chars)
@@ -261,7 +261,7 @@ function multiTraitFunction(people){
     let searchArray = []
     let counter = 0
     let searching = true
-    let traitsArray = ["Gender", "DOB", "Height", "Occupation", "Eye Color"];
+    let traitsArray = ["gender", "dob", "height", "occupation", "eyeColor"];
     let trait = promptFor(`Which trait would you like to search? ${traitsArray}`,chars);
     let narrowSearch = promptFor(`What sort of ${trait} would you like to search for?`,chars)
     searchArray = (filteredTraitSearch(people, trait, narrowSearch))
